@@ -126,7 +126,8 @@ btnAddNote.addEventListener("click", async () => {
     if (!typeId) return;
   }
   const type = getNoteType(typeId);
-  const record = await type.createInstance(store);
+  const record = await type.createInstance(store, ctx);
+  if (!record) return; // user cancelled (e.g. closed the name prompt)
   showToast("Note created");
   await loadMainMenu();
   openNote(record);
