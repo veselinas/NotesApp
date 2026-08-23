@@ -6,7 +6,7 @@ import { initAuth, signIn, signOut, getActiveAccount } from "./auth.js";
 import { getMe } from "./graph.js";
 import * as store from "./store.js";
 import { NOTE_TYPES, getNoteType, getCreatableTypes, getSingletonTypes } from "./noteTypes/registry.js";
-import { showConfirm, showPrompt, showCreateNoteMenu, showToast, showErrorBanner, renderNoteGroups, openModal } from "./ui.js";
+import { showConfirm, showPrompt, showCreateNoteMenu, showToast, renderNoteGroups, openModal } from "./ui.js";
 
 // ---------------- DOM references ----------------
 const btnSignin = document.getElementById("btn-signin");
