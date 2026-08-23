@@ -11,8 +11,9 @@ import { groceryType } from "./grocery.js";
 import { todoType } from "./todo.js";
 import { wishlistType } from "./wishlist.js";
 import { researchType } from "./research.js";
+import { readingType } from "./reading.js";
 
-export const NOTE_TYPES = [groceryType, todoType, wishlistType, researchType];
+export const NOTE_TYPES = [groceryType, todoType, wishlistType, researchType, readingType];
 
 export function getNoteType(id) {
   return NOTE_TYPES.find(t => t.id === id) || null;
