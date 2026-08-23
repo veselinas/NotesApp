@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+<title>Notebook</title>
+
+<!-- iOS "Add to Home Screen" niceties -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Notebook" />
+<meta name="theme-color" content="#1B2430" />
+<link rel="manifest" href="manifest.json" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/styles.css" />
+
+<!-- MSAL browser library (redirect-flow auth against Microsoft identity platform) -->
+<script src="https://unpkg.com/@azure/msal-browser@v5.x/lib/msal-browser.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ===================== MAIN MENU ===================== -->
+  <header id="menu-header" class="menu-header">
+    <div class="menu-header-left">
+      <span class="app-name">Notebook</span>
+    </div>
+    <div class="menu-header-center">
+      <button id="btn-add-note" class="icon-btn icon-btn-accent" title="Add note" aria-label="Add note">+</button>
+    </div>
+    <div class="menu-header-right">
+      <div id="auth-status" class="auth-status">
+        <button id="btn-signin" class="link-btn">Sign in</button>
+        <div id="auth-name" class="auth-name hidden"></div>
+      </div>
+    </div>
+  </header>
+
+  <main id="note-list-view" class="note-list-view">
+    <div id="note-groups" class="note-groups"></div>
+    <div id="empty-state" class="empty-state hidden">
+      <p>Nothing here yet. Sign in with OneDrive to load your notebook.</p>
+    </div>
+  </main>
+
+  <!-- ===================== NOTE VIEW ===================== -->
+  <section id="note-view" class="note-view hidden">
+    <header class="note-view-header">
+      <button id="btn-back" class="icon-btn" title="Back" aria-label="Back">&larr;</button>
+      <div id="note-view-title" class="note-view-title"></div>
+      <button id="btn-save" class="icon-btn icon-btn-accent" title="Save" aria-label="Save">&#10003;</button>
+    </header>
+    <div id="note-view-subheader" class="note-view-subheader"></div>
+    <div id="note-view-body" class="note-view-body"></div>
+    <div id="note-view-footer" class="note-view-footer"></div>
+  </section>
+
+</div>
+
+<!-- ===================== MODAL ROOT ===================== -->
+<div id="modal-root" class="modal-root hidden"></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

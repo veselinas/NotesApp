@@ -1,0 +1,27 @@
+// =========================================================
+// Global configuration
+// =========================================================
+
+// Replace with the Application (client) ID from your Azure AD
+// app registration (Azure Portal -> App registrations -> your app
+// -> Overview -> "Application (client) ID").
+export const CLIENT_ID = "YOUR_CLIENT_ID_HERE";
+
+// "common" allows both personal Microsoft accounts and work/school
+// accounts to sign in. Use your tenant ID instead if you want to
+// restrict sign-in to a single organisation.
+export const AUTHORITY = "https://login.microsoftonline.com/common";
+
+// Must exactly match a "Single-page application" redirect URI
+// registered on the Azure app (Authentication blade). Using
+// location.origin + pathname means it works automatically whether
+// you host at a domain root or in a sub-path, and whether you're
+// testing on your laptop or on your phone.
+export const REDIRECT_URI = window.location.origin + window.location.pathname;
+
+// Delegated Microsoft Graph permissions the app requests.
+export const GRAPH_SCOPES = ["User.Read", "Files.ReadWrite"];
+
+// Folder created in the root of the signed-in user's OneDrive
+// where every CSV file for this app is stored.
+export const APP_FOLDER = "NotesApp";
