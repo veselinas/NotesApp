@@ -17,10 +17,10 @@ export const AUTHORITY = "https://login.microsoftonline.com/common";
 // location.origin + pathname means it works automatically whether
 // you host at a domain root or in a sub-path, and whether you're
 // testing on your laptop or on your phone.
-export const REDIRECT_URI = window.location.origin + window.location.pathname;
+export const REDIRECT_URI = "https://veselinas.github.io/NotesApp/";
 
 // Delegated Microsoft Graph permissions the app requests.
-export const GRAPH_SCOPES = ["User.Read", "Files.ReadWrite"];
+export const GRAPH_SCOPES = ["Files.ReadWrite"];
 
 // Folder created in the root of the signed-in user's OneDrive
 // where every CSV file for this app is stored.
