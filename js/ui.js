@@ -5,7 +5,14 @@
 
 const modalRoot = document.getElementById("modal-root");
 
-function openModal(buildContent) {
+/**
+ * Generic modal primitive: you get a blank card and a close(value)
+ * function, and build whatever you need into it. showConfirm /
+ * showPrompt / showCreateNoteMenu below are all thin wrappers over
+ * this; note-type modules needing something richer (e.g. the
+ * recipe editor) can call this directly via ctx.customModal.
+ */
+export function openModal(buildContent) {
   return new Promise((resolve) => {
     modalRoot.innerHTML = "";
     modalRoot.classList.remove("hidden");
