@@ -35,6 +35,7 @@ function getMsal() {
  */
 export async function initAuth() {
   const client = getMsal();
+  await client.initialize();
   const result = await client.handleRedirectPromise();
   if (result && result.account) {
     activeAccount = result.account;
