@@ -5,7 +5,7 @@
 // Replace with the Application (client) ID from your Azure AD
 // app registration (Azure Portal -> App registrations -> your app
 // -> Overview -> "Application (client) ID").
-export const CLIENT_ID = "YOUR_CLIENT_ID_HERE";
+export const CLIENT_ID = "5ea7362c-541f-49b8-bc57-39c15eb171fa";
 
 // "common" allows both personal Microsoft accounts and work/school
 // accounts to sign in. Use your tenant ID instead if you want to
