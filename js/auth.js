@@ -20,7 +20,7 @@ function getMsal() {
         // full-page redirect round trip and works the same on iOS
         // Safari and on desktop browsers.
         cacheLocation: "localStorage",
-        storeAuthStateInCookie: false,
+        storeAuthStateInCookie: true,
       },
     });
   }
