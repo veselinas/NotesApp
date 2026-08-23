@@ -19,7 +19,7 @@ export const groceryType = {
   showInCreateMenu: true,
 
   /** Called from the "+" menu. Creates a new dated grocery list. */
-  async createInstance(store) {
+  async createInstance(store, ctx) {
     const date = todayISO();
     let name = date;
     let file = `grocerylist_${date}.csv`;
