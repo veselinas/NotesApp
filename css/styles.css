@@ -519,6 +519,85 @@ datalist {}
   cursor: pointer;
 }
 
+/* ---------------- Recipe book ---------------- */
+.recipe-category { margin-bottom: 14px; }
+.recipe-category-header {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--rule);
+  padding: 6px 2px;
+  cursor: pointer;
+}
+.recipe-category-items { padding-left: 4px; }
+.recipe-modal-section-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 16px 0 8px;
+}
+.recipe-ingredient-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.recipe-ingredient-row input[type="text"] {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1.5px solid var(--paper-line);
+  background: var(--paper-alt);
+  font-size: 0.9rem;
+}
+.recipe-ingredient-row input[type="text"]:not(.recipe-qty-input) { flex: 2; min-width: 0; }
+.recipe-qty-input { flex: 1; min-width: 0; }
+.recipe-step-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-bottom: 6px;
+}
+.recipe-step-num {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--muted);
+  width: 18px;
+  flex-shrink: 0;
+  padding-top: 9px;
+  text-align: right;
+}
+.recipe-step-input {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1.5px solid var(--paper-line);
+  background: var(--paper-alt);
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+  resize: vertical;
+}
+.recipe-add-row-btn {
+  background: none;
+  border: 1px dashed var(--paper-line);
+  border-radius: 6px;
+  color: var(--accent-green);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 8px;
+  width: 100%;
+  cursor: pointer;
+  margin-top: 2px;
+}
+
 /* ---------------- Modal ---------------- */
 .modal-root {
   position: fixed; inset: 0;
@@ -535,6 +614,8 @@ datalist {}
   background: var(--paper);
   width: 100%;
   max-width: 440px;
+  max-height: 85vh;
+  overflow-y: auto;
   border-radius: 16px 16px 0 0;
   padding: 20px 20px calc(20px + var(--safe-bottom));
   box-shadow: 0 -10px 30px rgba(0,0,0,0.35);
