@@ -13,6 +13,7 @@ function getMsal() {
         clientId: CLIENT_ID,
         authority: AUTHORITY,
         redirectUri: REDIRECT_URI,
+        navigateToLoginRequestUrl: false
       },
       cache: {
         // localStorage (not sessionStorage) so sign-in survives the
