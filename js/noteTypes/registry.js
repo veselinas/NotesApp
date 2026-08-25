@@ -16,6 +16,7 @@ import { recipeType } from "./recipe.js";
 import { packingType } from "./packing.js";
 import { braindumpType } from "./braindump.js";
 import { bulletlistType } from "./bulletlist.js";
+import { womenCalendarType } from "./womencalendar.js";
 
 export const NOTE_TYPES = [
   groceryType,
@@ -27,6 +28,7 @@ export const NOTE_TYPES = [
   packingType,
   braindumpType,
   bulletlistType,
+  womenCalendarType,
 ];
 
 export function getNoteType(id) {
