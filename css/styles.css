@@ -597,6 +597,19 @@ datalist {}
   cursor: pointer;
   margin-top: 2px;
 }
+/* ---------------- Brain dump ---------------- */
+.braindump-textarea {
+  width: 100%;
+  min-height: calc(100vh - 220px);
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  line-height: 1.6;
+  padding: 14px 16px;
+  border-radius: 8px;
+  border: 1.5px solid var(--paper-line);
+  background: var(--paper-alt);
+  resize: vertical;
+}
 
 /* ---------------- Modal ---------------- */
 .modal-root {
