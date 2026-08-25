@@ -611,6 +611,95 @@ datalist {}
   resize: vertical;
 }
 
+/* ---------------- Women's calendar ---------------- */
+:root {
+  --cal-cycle: #e39cb3;
+  --cal-ovulation: #8fb8d9;
+}
+.calendar-month-label {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+.calendar-weekday-row { margin-bottom: 4px; }
+.calendar-weekday {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 4px 0;
+}
+.calendar-day {
+  position: relative;
+  aspect-ratio: 1;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+}
+.calendar-day-empty { visibility: hidden; pointer-events: none; }
+.calendar-day-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.82rem;
+  color: var(--ink);
+}
+.calendar-day-circle.circle-cycle { background: var(--cal-cycle); }
+.calendar-day-circle.circle-ovulation { background: var(--cal-ovulation); }
+.calendar-heart {
+  position: absolute;
+  top: -3px;
+  right: -1px;
+  font-size: 0.75rem;
+  line-height: 1;
+  color: transparent;
+  pointer-events: none;
+}
+.calendar-heart.heart-unprotected { -webkit-text-stroke: 1.1px var(--danger); }
+.calendar-heart.heart-protected { -webkit-text-stroke: 1.1px var(--accent-green); }
+.calendar-heart.heart-na { -webkit-text-stroke: 1.1px var(--cal-ovulation); }
+
+.calendar-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--paper-line);
+}
+.calendar-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+.calendar-legend-swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.calendar-legend-cycle { background: var(--cal-cycle); }
+.calendar-legend-ovulation { background: var(--cal-ovulation); }
+.calendar-legend-heart {
+  width: 14px;
+  font-size: 0.9rem;
+  line-height: 1;
+  color: transparent;
+  flex-shrink: 0;
+}
+
 /* ---------------- Modal ---------------- */
 .modal-root {
   position: fixed; inset: 0;
