@@ -56,13 +56,18 @@ export const bulletlistType = {
 
     function isValid(r) { return r.valid !== "false"; }
 
-    const addBtn = document.createElement("button");
-    addBtn.type = "button";
-    addBtn.className = "icon-btn icon-btn-accent";
-    addBtn.style.marginBottom = "14px";
-    addBtn.textContent = "+";
-    addBtn.setAttribute("aria-label", "Add bullet");
-    body.appendChild(addBtn);
+    // categories added via the "+" button that don't have any
+    // bullets yet - tracked separately since a category only really
+    // exists in the CSV once at least one bullet row uses it.
+    const extraCategories = new Set();
+
+    const addCategoryBtn = document.createElement("button");
+    addCategoryBtn.type = "button";
+    addCategoryBtn.className = "icon-btn icon-btn-accent";
+    addCategoryBtn.style.marginBottom = "14px";
+    addCategoryBtn.textContent = "+";
+    addCategoryBtn.setAttribute("aria-label", "Add category");
+    body.appendChild(addCategoryBtn);
 
     const listWrap = document.createElement("div");
     body.appendChild(listWrap);
@@ -70,12 +75,14 @@ export const bulletlistType = {
     function render() {
       listWrap.innerHTML = "";
       const active = rows.filter(isValid);
-      const categories = [...new Set(active.map(r => r.category))].sort((a, b) => a.localeCompare(b));
+      const categories = [...new Set([...active.map(r => r.category), ...extraCategories])].sort((a, b) =>
+        a.localeCompare(b)
+      );
 
       if (categories.length === 0) {
         const empty = document.createElement("p");
         empty.className = "note-row-sub";
-        empty.textContent = "No items yet.";
+        empty.textContent = "No categories yet — tap + to add one.";
         listWrap.appendChild(empty);
       }
 
@@ -111,24 +118,47 @@ export const bulletlistType = {
           row.appendChild(remove);
           listWrap.appendChild(row);
         });
+
+        // inline "add bullet" row for this category
+        const addRow = document.createElement("div");
+        addRow.className = "add-row";
+        const input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = "Add bullet";
+        const addBulletBtn = document.createElement("button");
+        addBulletBtn.type = "button";
+        addBulletBtn.textContent = "Add";
+        addRow.appendChild(input);
+        addRow.appendChild(addBulletBtn);
+        listWrap.appendChild(addRow);
+
+        function submitAdd() {
+          const value = input.value.trim();
+          if (!value) return;
+          rows.push({ category: cat, bullet: value, valid: "true" });
+          extraCategories.delete(cat);
+          render();
+        }
+        addBulletBtn.addEventListener("click", submitAdd);
+        input.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") { e.preventDefault(); submitAdd(); }
+        });
       });
     }
 
-    addBtn.addEventListener("click", async () => {
-      const existingCategories = [...new Set(rows.filter(isValid).map(r => r.category))];
+    addCategoryBtn.addEventListener("click", async () => {
+      const existingCategories = [...new Set([...rows.filter(isValid).map(r => r.category), ...extraCategories])];
       const result = await ctx.prompt({
-        title: "Add bullet",
+        title: "Add category",
         fields: [
           { name: "category", label: "Category", type: "text", options: existingCategories, placeholder: "New or existing category" },
-          { name: "bullet", label: "Bullet", type: "text", placeholder: "What do you want to note?" },
         ],
         confirmLabel: "Add",
       });
       if (result === null) return;
       const category = (result.category || "").trim();
-      const bulletText = (result.bullet || "").trim();
-      if (!category || !bulletText) return;
-      rows.push({ category, bullet: bulletText, valid: "true" });
+      if (!category) return;
+      extraCategories.add(category);
       render();
     });
 
