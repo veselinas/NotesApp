@@ -24,4 +24,4 @@ export const GRAPH_SCOPES = ["Files.ReadWrite"];
 
 // Folder created in the root of the signed-in user's OneDrive
 // where every CSV file for this app is stored.
-export const APP_FOLDER = "NotesApp";
+export const APP_FOLDER = "App_NotesApp";
