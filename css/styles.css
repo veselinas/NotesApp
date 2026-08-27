@@ -275,6 +275,11 @@ button { font-family: inherit; }
   border-color: var(--accent-green);
   color: var(--paper);
 }
+.item-check-secondary.checked {
+  background: var(--amber);
+  border-color: var(--amber);
+  color: var(--paper);
+}
 .item-label {
   flex: 1;
   font-size: 0.96rem;
