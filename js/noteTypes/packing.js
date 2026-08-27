@@ -3,17 +3,21 @@
 // - multiple named instances, like Grocery, but user-named
 //   instead of date-named: one CSV per list,
 //   "packinglist_<name>.csv"
-// - columns: category, item, status (yes | no | deleted)
-//   note this type uses a 3-state status column instead of the
-//   checked/valid pair Grocery uses - "deleted" doubles as the
-//   soft-delete flag, so there's no separate valid column here.
+// - columns: category, item, status (yes | no | deleted),
+//   status_return (yes | no | deleted)
+//   "status" is the pre-travel packing checkbox (left), and
+//   "status_return" is the post-travel unpacking checkbox
+//   (right) - same 3-state shape as "status", though in
+//   practice only yes/no get toggled from the UI; "deleted" is
+//   only ever driven by the left status column via the minus
+//   button, since deleting is a whole-row action.
 // - adding an item prompts for category (existing or new, via
 //   datalist) and item name, same interaction as Research.
 // - display: checkbox list grouped by category (checked = "yes").
 // =========================================================
 import { readTable, writeTable, todayISO } from "../store.js";
 
-const HEADERS = ["category", "item", "status"];
+const HEADERS = ["category", "item", "status", "status_return"];
 
 function slugForFilename(name) {
   return name.replace(/[\\/:*?"<>|]+/g, "-").trim();
