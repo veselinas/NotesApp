@@ -62,6 +62,7 @@ export const packingType = {
 
     function isValid(r) { return r.status !== "deleted"; }
     function isChecked(r) { return r.status === "yes"; }
+    function isCheckedReturn(r) { return r.status_return === "yes"; }
 
     // categories added via the "+" button that don't have any items
     // yet - tracked separately since a category only really exists
@@ -110,7 +111,7 @@ export const packingType = {
           const check = document.createElement("button");
           check.type = "button";
           check.className = "item-check" + (checked ? " checked" : "");
-          check.setAttribute("aria-label", "Toggle packed");
+          check.setAttribute("aria-label", "Toggle packed before travel");
           check.textContent = "\u2713";
           check.addEventListener("click", () => {
             r.status = checked ? "no" : "yes";
@@ -120,6 +121,17 @@ export const packingType = {
           const itemLabel = document.createElement("div");
           itemLabel.className = "item-label" + (checked ? " checked" : "");
           itemLabel.textContent = r.item;
+
+          const checkedReturn = isCheckedReturn(r);
+          const checkReturn = document.createElement("button");
+          checkReturn.type = "button";
+          checkReturn.className = "item-check item-check-secondary" + (checkedReturn ? " checked" : "");
+          checkReturn.setAttribute("aria-label", "Toggle packed after travel");
+          checkReturn.textContent = "\u2713";
+          checkReturn.addEventListener("click", () => {
+            r.status_return = checkedReturn ? "no" : "yes";
+            render();
+          });
 
           const remove = document.createElement("button");
           remove.type = "button";
@@ -133,9 +145,9 @@ export const packingType = {
 
           row.appendChild(check);
           row.appendChild(itemLabel);
+          row.appendChild(checkReturn);
           row.appendChild(remove);
           list.appendChild(row);
-        });
 
         listWrap.appendChild(list);
 
@@ -155,7 +167,7 @@ export const packingType = {
         function submitAdd() {
           const value = input.value.trim();
           if (!value) return;
-          rows.push({ category: cat, item: value, status: "no" });
+          rows.push({ category: cat, item: value, status: "no", status_return: "no" });
           extraCategories.delete(cat);
           render();
         }
