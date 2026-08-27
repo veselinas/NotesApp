@@ -148,7 +148,8 @@ export const packingType = {
           row.appendChild(checkReturn);
           row.appendChild(remove);
           list.appendChild(row);
-
+          });
+        
         listWrap.appendChild(list);
 
         // inline "add item" row for this category
