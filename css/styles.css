@@ -671,9 +671,9 @@ datalist {}
   color: transparent;
   pointer-events: none;
 }
-.calendar-heart.heart-unprotected { -webkit-text-stroke: 1.1px var(--danger); }
-.calendar-heart.heart-protected { -webkit-text-stroke: 1.1px var(--accent-green); }
-.calendar-heart.heart-na { -webkit-text-stroke: 1.1px var(--cal-ovulation); }
+.calendar-heart.heart-unprotected, .calendar-legend-heart.heart-unprotected { -webkit-text-stroke: 1.1px var(--danger); }
+.calendar-heart.heart-protected, .calendar-legend-heart.heart-protected { -webkit-text-stroke: 1.1px var(--accent-green); }
+.calendar-heart.heart-na, .calendar-legend-heart.heart-na { -webkit-text-stroke: 1.1px var(--cal-ovulation); }
 
 .calendar-legend {
   display: flex;
