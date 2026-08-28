@@ -108,6 +108,8 @@ export const packingType = {
           row.className = "item-row";
 
           const checked = isChecked(r);
+          const checkedReturn = isCheckedReturn(r);
+
           const check = document.createElement("button");
           check.type = "button";
           check.className = "item-check" + (checked ? " checked" : "");
@@ -119,10 +121,9 @@ export const packingType = {
           });
 
           const itemLabel = document.createElement("div");
-          itemLabel.className = "item-label" + (checked ? " checked" : "");
+          itemLabel.className = "item-label" + (checkedReturn ? " checked" : "");
           itemLabel.textContent = r.item;
 
-          const checkedReturn = isCheckedReturn(r);
           const checkReturn = document.createElement("button");
           checkReturn.type = "button";
           checkReturn.className = "item-check item-check-secondary" + (checkedReturn ? " checked" : "");
