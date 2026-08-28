@@ -60,7 +60,7 @@ export const todoType = {
     // categories are ignored, just the flat list of item names.
     let taskSuggestions = [];
     const allNotes = await listNoteRecords();
-    const checklistTodoNote = allNotes.find(r => r.type === "checklist" && r.file === "checklist_todo.csv");
+    const checklistTodoNote = allNotes.find(r => r.type === "checklist" && r.file === "checklist_Tasks.csv");
     if (checklistTodoNote) {
       const checklistTable = await readTable(checklistTodoNote.file, CHECKLIST_HEADERS);
       taskSuggestions = checklistTable.rows
