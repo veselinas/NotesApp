@@ -14,10 +14,11 @@
 // could be appended to HEADERS without breaking existing rows,
 // since parseCSV/stringifyCSV are header-driven.
 // =========================================================
-import { readTable, writeTable, todayISO } from "../store.js";
+import { readTable, writeTable, todayISO, listNoteRecords } from "../store.js";
 
 const FILE = "todolist.csv";
 const HEADERS = ["date", "task", "status"];
+const CHECKLIST_HEADERS = ["category", "item", "status"];
 
 function addDays(iso, delta) {
   const [y, m, d] = iso.split("-").map(Number);
@@ -54,6 +55,20 @@ export const todoType = {
     const rows = table.rows.map(r => ({ ...r }));
     let viewDate = todayISO();
 
+    // If a Checklist note named "todo" exists ("checklist_todo.csv"),
+    // use its items as autocomplete suggestions when adding a task -
+    // categories are ignored, just the flat list of item names.
+    let taskSuggestions = [];
+    const allNotes = await listNoteRecords();
+    const checklistTodoNote = allNotes.find(r => r.type === "checklist" && r.file === "checklist_todo.csv");
+    if (checklistTodoNote) {
+      const checklistTable = await readTable(checklistTodoNote.file, CHECKLIST_HEADERS);
+      taskSuggestions = checklistTable.rows
+        .filter(r => r.status !== "deleted")
+        .map(r => r.item)
+        .filter(Boolean);
+    }
+
     // ---- date nav (subheader) ----
     const nav = document.createElement("div");
     nav.className = "date-nav";
@@ -87,18 +102,28 @@ export const todoType = {
     list.className = "item-list";
     body.appendChild(list);
 
-    const addRow = document.createElement("div");
+        const addRow = document.createElement("div");
     addRow.className = "add-row";
     const input = document.createElement("input");
     input.type = "text";
     input.placeholder = "Add a task";
+    if (taskSuggestions.length) {
+      const dl = document.createElement("datalist");
+      dl.id = "todo-task-suggestions";
+      taskSuggestions.forEach(s => {
+        const opt = document.createElement("option");
+        opt.value = s;
+        dl.appendChild(opt);
+      });
+      input.setAttribute("list", "todo-task-suggestions");
+      addRow.appendChild(dl);
+    }
     const addBtn = document.createElement("button");
     addBtn.type = "button";
     addBtn.textContent = "Add";
     addRow.appendChild(input);
     addRow.appendChild(addBtn);
     body.appendChild(addRow);
-
     // ---- good night button (footer) ----
     const goodnightBtn = document.createElement("button");
     goodnightBtn.type = "button";
