@@ -147,6 +147,17 @@ export const researchType = {
         await writeTable(FILE, HEADERS, rows);
         ctx.toast("Research list saved");
       },
+      print() {
+        const active = rows.filter(isValid);
+        const categories = [...new Set(active.map(r => r.category))].sort((a, b) => a.localeCompare(b));
+        return {
+          title: "Research",
+          sections: categories.map(cat => ({
+            heading: cat,
+            items: active.filter(r => r.category === cat).map(r => ({ text: r.topic, bullet: true })),
+          })),
+        };
+      },
     };
   },
 };
