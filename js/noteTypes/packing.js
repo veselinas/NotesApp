@@ -203,6 +203,19 @@ export const packingType = {
         await writeTable(record.file, HEADERS, rows);
         ctx.toast("Packing list saved");
       },
+      print() {
+        const active = rows.filter(isValid);
+        const categories = [...new Set(active.map(r => r.category))].sort((a, b) => a.localeCompare(b));
+        return {
+          title: `Packing — ${record.name}`,
+          sections: categories.map(cat => ({
+            heading: cat,
+            items: active
+              .filter(r => r.category === cat)
+              .map(r => ({ text: r.item, checked: isChecked(r), checked2: isCheckedReturn(r) })),
+          })),
+        };
+      },
     };
   },
 };
