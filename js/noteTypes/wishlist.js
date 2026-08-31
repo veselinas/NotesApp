@@ -19,6 +19,7 @@ export const wishlistType = {
   groupLabel: "Wish list",
   singleton: true,
   showInCreateMenu: false,
+  printable: false,
 
   async ensure(store) {
     return await store.ensureSingletonNote("wishlist", "Wish List", FILE, HEADERS);
