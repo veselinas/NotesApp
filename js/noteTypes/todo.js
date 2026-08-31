@@ -224,6 +224,17 @@ export const todoType = {
         await writeTable(FILE, HEADERS, rows);
         ctx.toast("To-do list saved");
       },
+      print() {
+        return {
+          title: "To-Do",
+          subtitle: formatDisplay(viewDate),
+          sections: [
+            {
+              items: tasksFor(viewDate).map(r => ({ text: r.task, checked: r.status === "completed" })),
+            },
+          ],
+        };
+      },
     };
   },
 };
