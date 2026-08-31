@@ -169,6 +169,17 @@ export const bulletlistType = {
         await writeTable(record.file, HEADERS, rows);
         ctx.toast("Bullet list saved");
       },
+      print() {
+        const active = rows.filter(isValid);
+        const categories = [...new Set(active.map(r => r.category))].sort((a, b) => a.localeCompare(b));
+        return {
+          title: `Bullets — ${record.name}`,
+          sections: categories.map(cat => ({
+            heading: cat,
+            items: active.filter(r => r.category === cat).map(r => ({ text: r.bullet, bullet: true })),
+          })),
+        };
+      },
     };
   },
 };
