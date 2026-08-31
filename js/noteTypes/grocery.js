@@ -80,6 +80,19 @@ export const groceryType = {
         await writeTable(record.file, LIST_HEADERS, rows);
         ctx.toast("Grocery list saved");
       },
+      print() {
+        return {
+          title: `Grocery — ${record.name}`,
+          subtitle: record.name,
+          sections: [
+            {
+              items: rows
+                .filter(r => r.valid !== "false")
+                .map(r => ({ text: r.item, checked: r.checked === "true" })),
+            },
+          ],
+        };
+      },
     };
   },
 };
