@@ -41,6 +41,7 @@ export const womenCalendarType = {
   groupLabel: "Women's calendar",
   singleton: true,
   showInCreateMenu: false,
+  printable: false,
 
   async ensure(store) {
     return await store.ensureSingletonNote("womencalendar", "Women's Calendar", FILE, HEADERS);
