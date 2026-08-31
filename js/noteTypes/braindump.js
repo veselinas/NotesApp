@@ -67,6 +67,12 @@ export const braindumpType = {
         await writeTable(record.file, HEADERS, text ? [{ text }] : []);
         ctx.toast("Brain dump saved");
       },
+      print() {
+        return {
+          title: `Brain Dump — ${record.name}`,
+          sections: [{ text: textarea.value }],
+        };
+      },
     };
   },
 };
