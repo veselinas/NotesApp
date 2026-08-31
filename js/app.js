@@ -5,7 +5,7 @@
 import { initAuth, signIn, signOut, getActiveAccount } from "./auth.js";
 import * as store from "./store.js";
 import { NOTE_TYPES, getNoteType, getCreatableTypes, getSingletonTypes } from "./noteTypes/registry.js";
-import { showConfirm, showPrompt, showCreateNoteMenu, showToast, showErrorBanner, renderNoteGroups, openModal } from "./ui.js";
+import { showConfirm, showPrompt, showCreateNoteMenu, showToast, renderNoteGroups, openModal } from "./ui.js";
 import { triggerPrint } from "./print.js";
 
 // ---------------- DOM references ----------------
