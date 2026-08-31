@@ -54,7 +54,10 @@
     <header class="note-view-header">
       <button id="btn-back" class="icon-btn" title="Back" aria-label="Back">&larr;</button>
       <div id="note-view-title" class="note-view-title"></div>
-      <button id="btn-save" class="icon-btn icon-btn-accent" title="Save" aria-label="Save">&#10003;</button>
+      <div class="note-view-header-actions">
+        <button id="btn-print" class="icon-btn hidden" title="Print" aria-label="Print">&#128424;&#65039;</button>
+        <button id="btn-save" class="icon-btn icon-btn-accent" title="Save" aria-label="Save">&#10003;</button>
+      </div>
     </header>
     <div id="note-view-subheader" class="note-view-subheader"></div>
     <div id="note-view-body" class="note-view-body"></div>
@@ -62,6 +65,13 @@
   </section>
 
 </div>
+
+</div>
+
+<!-- ===================== PRINT AREA ===================== -->
+<!-- Hidden on screen; populated and shown only when printing -
+     see js/print.js and css/styles.css's @media print rules. -->
+<div id="print-area"></div>
 
 <!-- ===================== MODAL ROOT ===================== -->
 <div id="modal-root" class="modal-root hidden"></div>
