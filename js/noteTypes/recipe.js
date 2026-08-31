@@ -58,6 +58,7 @@ export const recipeType = {
   groupLabel: "Recipe book",
   singleton: true,
   showInCreateMenu: false,
+  printable: false, // may get a dedicated print layout later
 
   async ensure(store) {
     return await store.ensureSingletonNote("recipe", "Recipe Book", FILE, buildHeaders(BASE_CAPACITY));
