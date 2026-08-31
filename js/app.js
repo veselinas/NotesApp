@@ -3,10 +3,10 @@
 // the data store, and the two screens (note list / note view).
 // =========================================================
 import { initAuth, signIn, signOut, getActiveAccount } from "./auth.js";
-import { getMe } from "./graph.js";
 import * as store from "./store.js";
 import { NOTE_TYPES, getNoteType, getCreatableTypes, getSingletonTypes } from "./noteTypes/registry.js";
-import { showConfirm, showPrompt, showCreateNoteMenu, showToast, renderNoteGroups, openModal } from "./ui.js";
+import { showConfirm, showPrompt, showCreateNoteMenu, showToast, showErrorBanner, renderNoteGroups, openModal } from "./ui.js";
+import { triggerPrint } from "./print.js";
 
 // ---------------- DOM references ----------------
 const btnSignin = document.getElementById("btn-signin");
@@ -18,6 +18,7 @@ const emptyStateEl = document.getElementById("empty-state");
 
 const noteView = document.getElementById("note-view");
 const btnBack = document.getElementById("btn-back");
+const btnPrint = document.getElementById("btn-print");
 const btnSave = document.getElementById("btn-save");
 const noteViewTitle = document.getElementById("note-view-title");
 const noteViewSubheader = document.getElementById("note-view-subheader");
@@ -146,6 +147,10 @@ async function openNote(record) {
     setTitle: (t) => { noteViewTitle.textContent = t; },
   };
 
+  // print is opt-in per note type (anything without `printable: false`
+  // is printable by default) - see js/print.js for the shared renderer.
+  btnPrint.classList.toggle("hidden", type.printable === false);
+
   try {
     currentMount = await type.mount(elements, record, ctx);
   } catch (err) {
@@ -167,6 +172,17 @@ btnSave.addEventListener("click", async () => {
   } catch (err) {
     console.error(err);
     showToast("Save failed — check your connection");
+  }
+});
+
+btnPrint.addEventListener("click", () => {
+  if (!currentMount || !currentMount.print) return;
+  try {
+    const doc = currentMount.print();
+    triggerPrint(doc);
+  } catch (err) {
+    console.error(err);
+    showToast("Couldn't prepare this note for printing");
   }
 });
 
