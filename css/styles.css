@@ -243,6 +243,7 @@ button { font-family: inherit; }
 }
 .note-view-subheader {
   padding: 10px 16px 0;
+}
 .note-view-body {
   flex: 1;
   padding: 10px 14px 14px;
@@ -810,7 +811,6 @@ datalist {}
     background: #fff;
     color: #000;
   }
-}
 
   .print-title {
     font-family: Georgia, "Times New Roman", serif;
@@ -861,4 +861,5 @@ datalist {}
     line-height: 1.5;
     white-space: pre-wrap;
   }
+}
 
