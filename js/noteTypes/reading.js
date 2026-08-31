@@ -29,6 +29,7 @@ export const readingType = {
   groupLabel: "Reading list",
   singleton: true,
   showInCreateMenu: false,
+  printable: false, // may get a dedicated print layout later
 
   async ensure(store) {
     return await store.ensureSingletonNote("reading", "Reading", FILE, HEADERS);
