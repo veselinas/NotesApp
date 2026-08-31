@@ -236,9 +236,13 @@ button { font-family: inherit; }
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.note-view-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 .note-view-subheader {
   padding: 10px 16px 0;
-}
 .note-view-body {
   flex: 1;
   padding: 10px 14px 14px;
@@ -788,4 +792,72 @@ datalist {}
   font-size: 0.85rem;
   z-index: 60;
   box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+}
+
+/* ---------------- Print ---------------- */
+#print-area { display: none; }
+
+@media print {
+  body * { visibility: hidden; }
+  #print-area, #print-area * { visibility: visible; }
+  #print-area {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0;
+    background: #fff;
+    color: #000;
+  }
+
+  .print-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 20pt;
+    margin: 0 0 2pt;
+  }
+  .print-subtitle {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 10pt;
+    color: #444;
+    margin: 0 0 16pt;
+  }
+  .print-section {
+    margin-bottom: 14pt;
+    break-inside: avoid-page;
+    page-break-inside: avoid;
+  }
+  .print-section-heading {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 700;
+    font-size: 12pt;
+    margin: 0 0 4pt;
+    padding-bottom: 2pt;
+    border-bottom: 1px solid #999;
+  }
+  .print-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .print-item {
+    display: flex;
+    align-items: baseline;
+    gap: 6pt;
+    padding: 2pt 0;
+    font-size: 11pt;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .print-marker {
+    font-size: 12pt;
+    flex-shrink: 0;
+  }
+  .print-item-text { flex: 1; }
+  .print-text {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 11pt;
+    line-height: 1.5;
+    white-space: pre-wrap;
+  }
 }
