@@ -810,6 +810,7 @@ datalist {}
     background: #fff;
     color: #000;
   }
+}
 
   .print-title {
     font-family: Georgia, "Times New Roman", serif;
@@ -860,4 +861,4 @@ datalist {}
     line-height: 1.5;
     white-space: pre-wrap;
   }
-}
+
